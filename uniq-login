@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+  echo "Usage: $0 _project_name_"
+  exit -1
+fi
+
+echo "Logging in to $1..."
+sudo su - $1

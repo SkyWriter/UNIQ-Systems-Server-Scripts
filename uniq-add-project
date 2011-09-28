@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+  echo "Usage: $0 _project_name_"
+  exit -1
+fi
+
+if [ $(id -u) != "0" ]; then
+  echo "Gotta be root to add the project!"
+  exit -2
+fi
+
+export RUBY_VER="1.9.2"
+export LOGIN=$1
+export GEMSET_NAME=$LOGIN
+export PROJECT=$LOGIN
+
+useradd -g rvm -m $LOGIN
+su $LOGIN -c "bash --login -c /usr/local/bin/uniq-add-project-sued"
+cat /etc/nginx/apps/app.conf.sample | sed s/sample/$PROJECT/g > /etc/nginx/apps/$PROJECT.conf
+vim /etc/nginx/apps/$PROJECT.conf
+
+echo "Project $1 successfully created!"

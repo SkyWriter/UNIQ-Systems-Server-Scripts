@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+  echo "Usage: $0 _project_name_"
+  exit -1
+fi
+
+if [ $(id -u) != "0" ]; then
+  echo "Gotta be root to delete a project!"
+  exit -2
+fi
+
+export RUBY_VER="1.9.2"
+export LOGIN=$1
+export GEMSET_NAME=$LOGIN
+export PROJECT=$LOGIN
+
+source /usr/local/rvm/bin/rvm
+rvm use $RUBY_VER
+rvm --force gemset delete $GEMSET_NAME
+userdel -fr $LOGIN
+rm -f /etc/nginx/apps/$PROJECT.conf
+echo "Removed $PROJECT project successfully!"

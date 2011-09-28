@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $(id -u) == "0" ]; then
+  echo "Should not be ran as root"
+  exit -2
+fi
+
+cd ~
+chmod 707 .
+mkdir app
+cd app
+rvm --create --rvmrc $RUBY_VER@$GEMSET_NAME
+echo "gem: --no-ri --no-rdoc" >> ~/.gemrc
