@@ -6,7 +6,8 @@ if [ $(id -u) == "0" ]; then
 fi
 
 cd ~
-chmod 707 .
+chgrp nginx ~
+chmod 750 .
 mkdir app
 cd app
 rvm --create --rvmrc $RUBY_VER@$GEMSET_NAME
