@@ -5,7 +5,7 @@ echo "Making an installation script..."
 TGZ_FILE=/tmp/uniq_scripts_install.tgz
 BASE64_FILE=/tmp/uniq_scripts_install.tgz.base64
 
-tar cvfz $TGZ_FILE uniq-add-project uniq-add-project-sued uniq-del-project uniq-login
+tar cvfz $TGZ_FILE uniq-add-project uniq-add-project-sued uniq-del-project uniq-login uniq-vars
 base64 -i $TGZ_FILE -o $BASE64_FILE
 # rm -f $TGZ_FILE
 

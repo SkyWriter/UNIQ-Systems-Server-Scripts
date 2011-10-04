@@ -10,10 +10,7 @@ if [ $(id -u) != "0" ]; then
   exit -2
 fi
 
-export RUBY_VER="1.9.2"
-export LOGIN=$1
-export GEMSET_NAME=$LOGIN
-export PROJECT=$LOGIN
+source /usr/local/bin/uniq-vars
 
 source /usr/local/rvm/bin/rvm
 rvm use $RUBY_VER

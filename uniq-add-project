@@ -10,13 +10,12 @@ if [ $(id -u) != "0" ]; then
   exit -2
 fi
 
-export RUBY_VER="1.9.2"
-export LOGIN=$1
-export GEMSET_NAME=$LOGIN
-export PROJECT=$LOGIN
+source /usr/local/bin/uniq-vars
 
 useradd -g rvm -m $LOGIN
 su $LOGIN -c "bash --login -c /usr/local/bin/uniq-add-project-sued"
+chgrp nginx /home/$LOGIN
+chmod 750 /home/$LOGIN
 cat /etc/nginx/apps/app.conf.sample | sed s/sample/$PROJECT/g > /etc/nginx/apps/$PROJECT.conf
 vim /etc/nginx/apps/$PROJECT.conf
 
